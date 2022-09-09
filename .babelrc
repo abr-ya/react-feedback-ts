@@ -6,7 +6,9 @@
     }],
     "@babel/preset-typescript"
   ],
-  "plugins": [],
+  "plugins": [
+    "macros"
+  ],
   "env": {
     "development": {
       "plugins": [
