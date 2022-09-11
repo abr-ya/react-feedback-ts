@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Button from "components/Button/Button";
-import { BtnContainer, CloseButton, DialogContainer, DialogRight, MainPart, Overlay } from "./Dialog.styled";
+import { BtnContainer, DialogContainer, DialogRight, MainPart, Overlay } from "./Dialog.styled";
+import { CloseButton } from "components";
 
 interface IDialog {
   children: ReactNode;
@@ -31,14 +32,14 @@ const Dialog = ({ open, onClose, onYes, img, children, textNo, textYes }: IDialo
       >
         {renderImg(img)}
         <DialogRight>
-          <CloseButton onClick={onClose}> X </CloseButton>
+          <CloseButton handler={onClose} />
           <MainPart>{children}</MainPart>
           <BtnContainer>
             <Button version="primary" onClick={yesHandler}>
-              {textYes || "YES-кнопка"}
+              {textYes || "Delete"}
             </Button>
             <Button version="gray" onClick={onClose}>
-              {textNo || "NO-кнопка"}
+              {textNo || "Cancel"}
             </Button>
           </BtnContainer>
         </DialogRight>
