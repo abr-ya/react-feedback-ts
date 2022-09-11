@@ -3,9 +3,7 @@ import { StyledRating } from "./styled/Rating.styled";
 
 const Rating = ({ feedback }) => {
   const count = feedback.length;
-  const averageRating = count
-    ? (feedback.reduce((acc, it) => acc + it.rating, 0) / count).toFixed(1)
-    : 0;
+  const averageRating = count ? (feedback.reduce((acc, it) => acc + it.rating, 0) / count).toFixed(1) : 0;
 
   return (
     <StyledRating>

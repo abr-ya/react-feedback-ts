@@ -1,9 +1,4 @@
-import {
-  StyledRatingSet,
-  RatingLi,
-  RatingLabel,
-  RatingInput,
-} from "./styled/Form.styled";
+import { StyledRatingSet, RatingLi, RatingLabel, RatingInput } from "./FeedbackForm/Form.styled";
 
 const RatingSet = ({ select, selected }) => {
   const handleChange = (e) => {

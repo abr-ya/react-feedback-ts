@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { StyledList } from "./styled/List.styled";
-import Item from "./Item";
+import Item from "./FeedbackItem/Item";
 
 const List = ({ feedback, deleteHandler }) => {
   if (!feedback || feedback.length === 0) {

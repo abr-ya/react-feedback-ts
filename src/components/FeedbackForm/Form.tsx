@@ -1,16 +1,20 @@
 import { useState, useEffect, FormEvent } from "react";
-import { StyledForm, Group, Input, ValidationMessage } from "./styled/Form.styled";
-import { Card } from "./styled/Common.styled";
-import { Button } from "./index";
-import RatingSet from "./RatingSet";
+import { StyledForm, Group, Input, ValidationMessage } from "./Form.styled";
+import { Button } from "../index";
+import RatingSet from "../RatingSet";
+import { AddHandlerType } from "interfaces";
 
-const Form = ({ addHandler }) => {
+interface IFeedbackForm {
+  addHandler: AddHandlerType;
+}
+
+const Form = ({ addHandler }: IFeedbackForm) => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");
 
-  const inputChangeHandler = ({ target: { value } }) => {
+  const inputChangeHandler = (value: string) => {
     // validation
     if (value === "") {
       setIsBtnDisabled(true);
@@ -56,19 +60,22 @@ const Form = ({ addHandler }) => {
   };
 
   return (
-    <Card>
-      <StyledForm onSubmit={submitHandler}>
-        <h4>How would you rate us?!</h4>
-        <RatingSet select={setRating} selected={rating} />
-        <Group>
-          <Input type="text" value={text} placeholder="Write a review" onChange={inputChangeHandler} />
-          <Button isDisabled={isBtnDisabled} isSubmit>
-            Send
-          </Button>
-        </Group>
-        <ValidationMessage>{message}</ValidationMessage>
-      </StyledForm>
-    </Card>
+    <StyledForm onSubmit={submitHandler}>
+      <h4>How would you rate us?!</h4>
+      <RatingSet select={setRating} selected={rating} />
+      <Group>
+        <Input
+          type="text"
+          value={text}
+          placeholder="Write a review"
+          onChange={(e) => inputChangeHandler(e.target.value)}
+        />
+        <Button isDisabled={isBtnDisabled} isSubmit>
+          Send
+        </Button>
+      </Group>
+      <ValidationMessage>{message}</ValidationMessage>
+    </StyledForm>
   );
 };
 
