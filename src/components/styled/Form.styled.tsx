@@ -8,7 +8,7 @@ export const Group = styled.div`
   display: flex;
   flex-direction: row;
   border: 1px solid #ccc;
-  padding: 8px 10px;
+  padding: 0;
   border-radius: 8px;
 `;
 
@@ -16,6 +16,7 @@ export const Input = styled.input`
   flex-grow: 2;
   border: none;
   font-size: 16px;
+  padding: 10px;
 
   &:focus {
     outline: none;
@@ -54,7 +55,7 @@ export const RatingLi = styled.li`
   }
 `;
 
-export const RatingLabel = styled.label`
+export const RatingLabel = styled.label<{ checked: boolean }>`
   position: absolute;
   top: 50%;
   left: 50%;

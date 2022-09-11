@@ -1,4 +1,6 @@
-const FeedbackData = [
+import { IFeedbackItem } from "interfaces";
+
+const FeedbackData: IFeedbackItem[] = [
   {
     id: 1,
     rating: 10,

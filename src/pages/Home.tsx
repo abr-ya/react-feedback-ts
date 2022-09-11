@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Container } from "../components/styled/Common.styled";
 import { List, Rating, Form } from "../components";
 import FeedbackData from "../data/FeedbackData";
+import { IFeedbackItem } from "interfaces";
 
 const Home = () => {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -11,7 +12,7 @@ const Home = () => {
       setFeedback((prev) => prev.filter((item) => item.id !== id));
     }
   };
-  const addHandler = (item) => {
+  const addHandler = (item: IFeedbackItem) => {
     setFeedback((prev) => [item, ...prev]);
     // eslint-disable-next-line no-alert
     alert("Спасибо за ваш отзыв!");
