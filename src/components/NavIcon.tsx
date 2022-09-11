@@ -8,9 +8,7 @@ const NavIcon = () => {
 
   return (
     <NavLinkBlock>
-      <NavLink to={isAbout ? "/" : "/about"}>
-        {isAbout ? <FaHome size={30} /> : <FaQuestion size={30} />}
-      </NavLink>
+      <NavLink to={isAbout ? "/" : "/about"}>{isAbout ? <FaHome size={30} /> : <FaQuestion size={30} />}</NavLink>
     </NavLinkBlock>
   );
 };

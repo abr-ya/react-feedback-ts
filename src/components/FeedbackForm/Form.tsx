@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { StyledForm, Group, Input, ValidationMessage } from "./Form.styled";
 import { Button } from "../index";
-import RatingSet from "../RatingSet";
+import RatingSet from "./RatingSet";
 import { AddHandlerType } from "interfaces";
 
 interface IFeedbackForm {
