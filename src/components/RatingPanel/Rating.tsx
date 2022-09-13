@@ -1,11 +1,9 @@
-import { IFeedbackItem } from "interfaces";
 import { StyledRating } from "./Rating.styled";
+import { useContext } from "react";
+import FeedbackContext from "context/FeedbackContext";
 
-interface IRating {
-  feedback: IFeedbackItem[];
-}
-
-const Rating = ({ feedback }: IRating) => {
+const Rating = () => {
+  const { feedback } = useContext(FeedbackContext);
   const count = feedback.length;
   const averageRating = count ? (feedback.reduce((acc, it) => acc + it.rating, 0) / count).toFixed(1) : 0;
 
