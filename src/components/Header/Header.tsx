@@ -1,4 +1,5 @@
-import { StyledHeader, Container } from "./styled/Common.styled";
+import { Container } from "components/styled/Common.styled";
+import { StyledHeader } from "./Header.styled";
 import NavIcon from "./NavIcon";
 
 const Header = () => {

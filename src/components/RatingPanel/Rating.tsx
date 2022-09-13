@@ -1,5 +1,5 @@
 import { IFeedbackItem } from "interfaces";
-import { StyledRating } from "./styled/Rating.styled";
+import { StyledRating } from "./Rating.styled";
 
 interface IRating {
   feedback: IFeedbackItem[];

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { StyledList } from "./styled/List.styled";
-import Item from "./FeedbackItem/Item";
+import { StyledList } from "./List.styled";
+import Item from "../FeedbackItem/Item";
 import { IFeedbackItem } from "interfaces";
 
 interface IFeedbackList {

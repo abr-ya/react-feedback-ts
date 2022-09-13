@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { FaQuestion, FaHome } from "react-icons/fa";
-import { NavLinkBlock, NavLink } from "./styled/Common.styled";
+import { NavLinkBlock, NavLink } from "./Header.styled";
 
 const NavIcon = () => {
   const { pathname } = useLocation();
