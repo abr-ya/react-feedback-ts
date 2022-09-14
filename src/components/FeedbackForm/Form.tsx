@@ -1,14 +1,14 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useContext } from "react";
 import { StyledForm, Group, Input, ValidationMessage } from "./Form.styled";
 import { Button } from "../index";
 import RatingSet from "./RatingSet";
-import { AddHandlerType } from "interfaces";
+import FeedbackContext from "context/FeedbackContext";
+import { toast } from "react-toastify";
+import { topRight3sec } from "utils/toastOptions";
 
-interface IFeedbackForm {
-  addHandler: AddHandlerType;
-}
+const Form = () => {
+  const { addFeedback } = useContext(FeedbackContext);
 
-const Form = ({ addHandler }: IFeedbackForm) => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
@@ -44,8 +44,8 @@ const Form = ({ addHandler }: IFeedbackForm) => {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
     if (rating === 0) {
-      // eslint-disable-next-line no-alert
-      alert("Необходимо поставить оценку!");
+      // при правильной блокировке кнопки сюда мы не попадаем
+      toast.error("Необходимо поставить оценку!");
       return;
     }
     if (text.trim().length > 10) {
@@ -54,7 +54,8 @@ const Form = ({ addHandler }: IFeedbackForm) => {
         text,
         rating,
       };
-      addHandler(newFeedback);
+      addFeedback(newFeedback);
+      toast("🦄 Спасибо за ваш отзыв!", topRight3sec);
       resetForm();
     }
   };

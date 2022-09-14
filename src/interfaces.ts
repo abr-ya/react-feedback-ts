@@ -11,5 +11,3 @@ export interface IFeedbackItem {
   rating: number;
   text: string;
 }
-
-export type AddHandlerType = (item: IFeedbackItem) => void;

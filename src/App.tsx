@@ -3,6 +3,8 @@ import GlobalStyle from "./components/styled/Common.styled";
 import { Header } from "./components";
 import { Home, About, Error404 } from "./pages";
 import { FeedbackProvider } from "context/FeedbackContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => (
   <FeedbackProvider>
@@ -15,6 +17,7 @@ const App = () => (
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
+    <ToastContainer />
   </FeedbackProvider>
 );
 
