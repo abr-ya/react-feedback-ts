@@ -1,11 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "regenerator-runtime/runtime";
-import "./base.css";
 import App from "./App";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById("root") as Element).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);

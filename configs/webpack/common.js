@@ -1,10 +1,10 @@
 // shared config (dev and prod)
-const Dotenv = require("dotenv-webpack");
 const { resolve } = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
+  entry: "./index.tsx",
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     modules: [resolve(__dirname, "../../src"), "node_modules"],
@@ -30,16 +30,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: "index.html.ejs" }),
-    new Dotenv(),
-    new MiniCssExtractPlugin(),
-  ],
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
-  },
-  performance: {
-    hints: false,
-  },
+  plugins: [new HtmlWebpackPlugin({ template: "index.html.ejs" }), new Dotenv()],
 };

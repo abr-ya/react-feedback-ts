@@ -1,6 +1,6 @@
 {
   "presets": [
-    "@babel/preset-env",
+    "@babel/env",
     ["@babel/preset-react", {
       "runtime": "automatic"
     }],
@@ -8,17 +8,5 @@
   ],
   "plugins": [
     "macros"
-  ],
-  "env": {
-    "development": {
-      "plugins": [
-        "react-refresh/babel"
-      ]
-    },
-    "production": {
-      "presets": [
-        "minify"
-      ]
-    }
-  }
+  ]
 }
