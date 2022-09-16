@@ -7,12 +7,20 @@ import { toast } from "react-toastify";
 import { topRight3sec } from "utils/toastOptions";
 
 const Form = () => {
-  const { addFeedback } = useContext(FeedbackContext);
+  const { addFeedback, currentItem, updateFeedback } = useContext(FeedbackContext);
 
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (currentItem) {
+      setIsBtnDisabled(false);
+      setText(currentItem.text);
+      setRating(currentItem.rating);
+    }
+  }, [currentItem]);
 
   const inputChangeHandler = (value: string) => {
     // validation
@@ -49,13 +57,20 @@ const Form = () => {
       return;
     }
     if (text.trim().length > 10) {
-      const newFeedback = {
-        id: +new Date(),
-        text,
-        rating,
-      };
-      addFeedback(newFeedback);
-      toast("🦄 Спасибо за ваш отзыв!", topRight3sec);
+      // не редактируем, а создаём
+      if (!currentItem) {
+        const newFeedback = {
+          id: +new Date(),
+          text,
+          rating,
+        };
+        addFeedback(newFeedback);
+        toast("🦄 Спасибо за ваш отзыв!", topRight3sec);
+      } else {
+        console.log("edit!");
+        const { id } = currentItem;
+        updateFeedback({ id, text, rating });
+      }
       resetForm();
     }
   };
@@ -72,7 +87,7 @@ const Form = () => {
           onChange={(e) => inputChangeHandler(e.target.value)}
         />
         <Button isDisabled={isBtnDisabled} isSubmit>
-          Send
+          {!currentItem ? "Send" : "Update"}
         </Button>
       </Group>
       <ValidationMessage>{message}</ValidationMessage>

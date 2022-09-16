@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { BlockNum, BlockText } from "./Item.styled";
 import { Card } from "../styled/Common.styled";
-import { CloseButton, Dialog } from "components";
+import { CloseButton, EditButton, Dialog } from "components";
 import { IFeedbackItem } from "interfaces";
 import FeedbackContext from "context/FeedbackContext";
 import logo from "logo.jpg";
 
 const Item = ({ rating, text, id }: IFeedbackItem) => {
-  const { deleteFeedback } = useContext(FeedbackContext);
+  const { deleteFeedback, editFeedback } = useContext(FeedbackContext);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -17,6 +17,10 @@ const Item = ({ rating, text, id }: IFeedbackItem) => {
 
   const closeClickHandler = () => {
     setIsDialogOpen(true);
+  };
+
+  const editClickHandler = () => {
+    editFeedback(id);
   };
 
   const yesHandler = () => {
@@ -29,6 +33,7 @@ const Item = ({ rating, text, id }: IFeedbackItem) => {
     <>
       <Card>
         <BlockNum>{rating}</BlockNum>
+        <EditButton handler={editClickHandler} />
         <CloseButton handler={closeClickHandler} />
         <BlockText>{text}</BlockText>
       </Card>

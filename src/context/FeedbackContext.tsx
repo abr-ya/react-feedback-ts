@@ -7,17 +7,24 @@ const FeedbackContext = createContext<FeedbackContextType>({
   feedback: [],
   addFeedback: () => false,
   deleteFeedback: () => false,
+  editFeedback: () => false,
+  updateFeedback: () => false,
+  currentItem: null,
 });
 
 interface IFeedbackManagerResult {
   feedback: IFeedbackItem[];
   addFeedback: (item: IFeedbackItem) => void;
   deleteFeedback: (id: number) => void;
+  editFeedback: (id: number) => void;
+  updateFeedback: (item: IFeedbackItem) => void;
+  currentItem: IFeedbackItem;
 }
 
 // разделение на Manager и Provider по Jack No BS TS #25
 const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResult => {
   const [feedback, setFeedback] = useState(initialFeedback);
+  const [currentItem, setCurrentItem] = useState<IFeedbackItem | null>(null);
 
   const addFeedback = (newFeedback: IFeedbackItem) => {
     setFeedback([newFeedback, ...feedback]);
@@ -27,7 +34,17 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     setFeedback(feedback.filter((item) => item.id !== id));
   };
 
-  return { feedback, addFeedback, deleteFeedback };
+  const editFeedback = (id: number) => {
+    const item: IFeedbackItem = feedback.find((item) => item.id == id);
+    setCurrentItem(item);
+  };
+
+  const updateFeedback = (fb: IFeedbackItem) => {
+    setFeedback(feedback.map((item) => (item.id !== fb.id ? item : fb)));
+    setCurrentItem(null);
+  };
+
+  return { feedback, addFeedback, deleteFeedback, editFeedback, currentItem, updateFeedback };
 };
 
 const startValues: IFeedbackItem[] = [
