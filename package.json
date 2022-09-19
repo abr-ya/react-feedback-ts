@@ -1,7 +1,7 @@
 {
-  "name": "hello-react-ts-2022-09",
-  "version": "0.1.0",
-  "description": "Starter for React",
+  "name": "react-feedback-ts",
+  "version": "1.0.0",
+  "description": "Feedback App with React, TypeScrypt and Styled Components",
   "author": "",
   "license": "MIT",
   "scripts": {
@@ -59,6 +59,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "framer-motion": "^7.3.5",
+    "gapi-script": "^1.2.0",
+    "react-google-login": "^5.2.2",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
     "react-toastify": "^9.0.8",

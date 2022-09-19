@@ -5,9 +5,11 @@ import RatingSet from "./RatingSet";
 import FeedbackContext from "context/FeedbackContext";
 import { toast } from "react-toastify";
 import { topRight3sec } from "utils/toastOptions";
+import UserContext from "context/UserContext";
 
 const Form = () => {
   const { addFeedback, currentItem, updateFeedback } = useContext(FeedbackContext);
+  const { user } = useContext(UserContext);
 
   const [text, setText] = useState("");
   const [rating, setRating] = useState(0);
@@ -77,7 +79,7 @@ const Form = () => {
 
   return (
     <StyledForm onSubmit={submitHandler}>
-      <h4>How would you rate us?!</h4>
+      <h4>How would you rate us, {user?.userName || "гость"}?!</h4>
       <RatingSet select={setRating} selected={rating} />
       <Group>
         <Input
