@@ -1,5 +1,6 @@
 import { IFeedbackItem } from "interfaces";
-import { createContext, FC, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { getAllFeedbacks } from "services/api";
 
 type FeedbackContextType = ReturnType<typeof FeedbackManager>;
 
@@ -10,6 +11,7 @@ const FeedbackContext = createContext<FeedbackContextType>({
   editFeedback: () => false,
   updateFeedback: () => false,
   currentItem: null,
+  isLoading: false,
 });
 
 interface IFeedbackManagerResult {
@@ -19,12 +21,24 @@ interface IFeedbackManagerResult {
   editFeedback: (id: number) => void;
   updateFeedback: (item: IFeedbackItem) => void;
   currentItem: IFeedbackItem;
+  isLoading: boolean;
 }
 
 // разделение на Manager и Provider по Jack No BS TS #25
 const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResult => {
   const [feedback, setFeedback] = useState(initialFeedback);
   const [currentItem, setCurrentItem] = useState<IFeedbackItem | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getFeedbacks = async () => {
+    const listFromServer: IFeedbackItem[] = await getAllFeedbacks();
+    setFeedback(listFromServer);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    getFeedbacks();
+  }, []);
 
   const addFeedback = (newFeedback: IFeedbackItem) => {
     setFeedback([newFeedback, ...feedback]);
@@ -44,14 +58,15 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     setCurrentItem(null);
   };
 
-  return { feedback, addFeedback, deleteFeedback, editFeedback, currentItem, updateFeedback };
+  return { feedback, addFeedback, deleteFeedback, editFeedback, currentItem, updateFeedback, isLoading };
 };
 
-const startValues: IFeedbackItem[] = [
-  { id: 1, text: "This item is from context", rating: 10 },
-  { id: 2, text: "This item is from context (2)", rating: 6 },
-  { id: 3, text: "This item is from context (3)", rating: 8 },
-];
+// const startValues: IFeedbackItem[] = [
+//   { id: 1, text: "This item is from context", rating: 10 },
+//   { id: 2, text: "This item is from context (2)", rating: 6 },
+//   { id: 3, text: "This item is from context (3)", rating: 8 },
+// ];
+const startValues = [];
 
 export const FeedbackProvider: FC<{ children: ReactNode }> = ({ children }) => (
   <FeedbackContext.Provider value={FeedbackManager(startValues)}>{children}</FeedbackContext.Provider>
