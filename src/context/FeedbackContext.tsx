@@ -33,7 +33,10 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
   const getFeedbacks = async () => {
     const listFromServer: IFeedbackItem[] = await getAllFeedbacks();
     setFeedback(listFromServer);
-    setIsLoading(false);
+    setTimeout(() => {
+      console.log("Loading delay from Context!");
+      setIsLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {

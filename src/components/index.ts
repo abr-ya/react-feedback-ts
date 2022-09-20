@@ -7,5 +7,6 @@ import CloseButton from "./FaButtons/CloseButton";
 import EditButton from "./FaButtons/EditButton";
 import Dialog from "./Dialog/Dialog";
 import GoogleLogin from "./GoogleLogin/GoogleLogin";
+import Loader from "./Loader/Loader";
 
-export { Header, List, Rating, FeedbackForm, Button, CloseButton, EditButton, Dialog, GoogleLogin };
+export { Header, List, Rating, FeedbackForm, Button, CloseButton, EditButton, Dialog, GoogleLogin, Loader };
