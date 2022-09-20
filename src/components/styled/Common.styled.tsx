@@ -31,3 +31,11 @@ export const Card = styled.div`
   margin: 20px 0;
   position: relative;
 `;
+
+export const Old = styled.p`
+  text-decoration: line-through;
+`;
+
+export const AboutList = styled.ul`
+  margin-top: 20px;
+`;
