@@ -1,6 +1,6 @@
-import { IFeedbackItem } from "interfaces";
+import { IFeedbackItem, INewFeedbackItem } from "interfaces";
 import { createContext, FC, ReactNode, useEffect, useState } from "react";
-import { getAllFeedbacks } from "services/api";
+import { addFeedbackRequest, getAllFeedbacks } from "services/api";
 
 type FeedbackContextType = ReturnType<typeof FeedbackManager>;
 
@@ -16,7 +16,7 @@ const FeedbackContext = createContext<FeedbackContextType>({
 
 interface IFeedbackManagerResult {
   feedback: IFeedbackItem[];
-  addFeedback: (item: IFeedbackItem) => void;
+  addFeedback: (item: INewFeedbackItem) => void;
   deleteFeedback: (id: number) => void;
   editFeedback: (id: number) => void;
   updateFeedback: (item: IFeedbackItem) => void;
@@ -43,8 +43,15 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     getFeedbacks();
   }, []);
 
-  const addFeedback = (newFeedback: IFeedbackItem) => {
-    setFeedback([newFeedback, ...feedback]);
+  const addFeedback = async (formFeedback: INewFeedbackItem) => {
+    const addFeedbackResult = await addFeedbackRequest(formFeedback);
+    if (addFeedbackResult.error) {
+      console.log("Произошла ошибка добавления, обработать!");
+    } else {
+      const newFeedback = addFeedbackResult.data;
+      console.log(`created with id ${newFeedback.id}`);
+      setFeedback([newFeedback, ...feedback]);
+    }
   };
 
   const deleteFeedback = (id: number) => {

@@ -1,14 +1,20 @@
 export interface IUser {
-  userId: number;
+  userId: string;
   userName: string;
   ava: string;
   email: string;
 }
 
-export interface IFeedbackItem {
-  id: number;
+export interface INewFeedbackItem {
   rating: number;
   text: string;
+  user?: string;
+  userId?: string;
+  ava?: string;
+}
+
+export interface IFeedbackItem extends INewFeedbackItem {
+  id: number;
 }
 
 // google answer

@@ -1,14 +1,32 @@
 import axios, { AxiosResponse } from "axios";
+import { INewFeedbackItem } from "interfaces";
 
 const baseUrl = process.env.API_URL;
 
+interface INormalizedResponse {
+  data?: any;
+  error?: string;
+}
+
 export const getAllFeedbacks = async () => {
-  let allPins: AxiosResponse | false = false;
+  let AllFeedbacks: AxiosResponse | false = false;
   try {
-    allPins = await axios.get(`${baseUrl}/`);
+    AllFeedbacks = await axios.get(`${baseUrl}/`);
   } catch (err) {
     console.log(err);
   }
 
-  return allPins ? allPins.data : false;
+  return AllFeedbacks ? AllFeedbacks.data : false;
+};
+
+export const addFeedbackRequest = async (item: INewFeedbackItem): Promise<INormalizedResponse> => {
+  let answer: AxiosResponse;
+  try {
+    answer = await axios.post(`${baseUrl}/`, item);
+  } catch (err) {
+    console.log(err);
+    return { error: err?.message };
+  }
+
+  return { data: answer.data };
 };

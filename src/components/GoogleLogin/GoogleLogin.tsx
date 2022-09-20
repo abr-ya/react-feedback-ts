@@ -7,7 +7,7 @@ const GoogleLogin = () => {
   const { user, setUser } = useContext(UserContext);
 
   const normaliseUser = (rawUser: IGoogleRespone) => ({
-    userId: parseInt(rawUser.googleId),
+    userId: rawUser.googleId,
     userName: rawUser.profileObj.name,
     ava: rawUser.profileObj.imageUrl,
     email: rawUser.profileObj.email,
@@ -15,7 +15,7 @@ const GoogleLogin = () => {
 
   const handleLogin = async (googleData) => {
     const normUser = normaliseUser(googleData);
-    console.log(googleData);
+    // console.log(googleData); // если надо посмотреть все данные
     setUser(normUser);
     // запрос на наш бэк - постим googleData.tokenId
     // в ответ получаем пользователя из базы - прочитанного или созданного
@@ -43,17 +43,12 @@ const GoogleLogin = () => {
         />
       );
 
-    return (
-      <>
-        <p>Привет, {user.userName}!</p>
-        <GoogleLogoutButton clientId={process.env.GOOGLE_CLIENT_ID} onLogoutSuccess={onLogoutSuccess} />
-      </>
-    );
+    return <GoogleLogoutButton clientId={process.env.GOOGLE_CLIENT_ID} onLogoutSuccess={onLogoutSuccess} />;
   };
 
   return (
     <>
-      <h4>Здесь пара слов о том, для чего нужен логин гугл!)</h4>
+      <h4>Все могут просмотривать отзывы и рейтинг, а чтобы добавить отзыв, нужно авторизоваться.)</h4>
       {renderButton()}
     </>
   );

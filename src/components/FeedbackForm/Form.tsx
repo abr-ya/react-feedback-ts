@@ -62,12 +62,14 @@ const Form = () => {
       // не редактируем, а создаём
       if (!currentItem) {
         const newFeedback = {
-          id: +new Date(),
           text,
           rating,
+          user: user.userName,
+          userId: user.userId,
+          ava: user.ava,
         };
         addFeedback(newFeedback);
-        toast("🦄 Спасибо за ваш отзыв!", topRight3sec);
+        toast("🦄 Отправляем отзыв...", topRight3sec);
       } else {
         console.log("edit!");
         const { id } = currentItem;
