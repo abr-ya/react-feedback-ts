@@ -17,8 +17,8 @@ const FeedbackContext = createContext<FeedbackContextType>({
 interface IFeedbackManagerResult {
   feedback: IFeedbackItem[];
   addFeedback: (item: INewFeedbackItem) => void;
-  deleteFeedback: (id: string) => void;
-  editFeedback: (id: string) => void;
+  deleteFeedback: (id: number) => void;
+  editFeedback: (id: number) => void;
   updateFeedback: (item: IFeedbackItem) => void;
   currentItem: IFeedbackItem;
   isLoading: boolean;
@@ -53,7 +53,7 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     }
   };
 
-  const deleteFeedback = async (id: string) => {
+  const deleteFeedback = async (id: number) => {
     const { error } = await deleteFeedbackRequest(id);
     if (error) {
       console.log(`Произошла ошибка удаления: ${error}`);
@@ -62,7 +62,7 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     }
   };
 
-  const editFeedback = (id: string) => {
+  const editFeedback = (id: number) => {
     const item: IFeedbackItem = feedback.find((item) => item.id == id);
     setCurrentItem(item);
   };

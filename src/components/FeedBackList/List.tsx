@@ -26,7 +26,7 @@ const List = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.75 }}
           >
-            <Item id={item.id} rating={item.rating} text={item.text} key={item.id} />
+            <Item id={item.id} rating={item.rating} text={item.text} key={item.id} userId={item.userId} />
           </motion.div>
         ))}
       </AnimatePresence>

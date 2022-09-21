@@ -7,6 +7,7 @@ export const Overlay = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 10000;
 `;
 
 export const DialogContainer = styled.div`
