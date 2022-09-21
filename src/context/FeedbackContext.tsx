@@ -1,6 +1,6 @@
 import { IFeedbackItem, INewFeedbackItem } from "interfaces";
 import { createContext, FC, ReactNode, useEffect, useState } from "react";
-import { addFeedbackRequest, getAllFeedbacks } from "services/api";
+import { addFeedbackRequest, deleteFeedbackRequest, getAllFeedbacks } from "services/api";
 
 type FeedbackContextType = ReturnType<typeof FeedbackManager>;
 
@@ -17,8 +17,8 @@ const FeedbackContext = createContext<FeedbackContextType>({
 interface IFeedbackManagerResult {
   feedback: IFeedbackItem[];
   addFeedback: (item: INewFeedbackItem) => void;
-  deleteFeedback: (id: number) => void;
-  editFeedback: (id: number) => void;
+  deleteFeedback: (id: string) => void;
+  editFeedback: (id: string) => void;
   updateFeedback: (item: IFeedbackItem) => void;
   currentItem: IFeedbackItem;
   isLoading: boolean;
@@ -44,21 +44,25 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
   }, []);
 
   const addFeedback = async (formFeedback: INewFeedbackItem) => {
-    const addFeedbackResult = await addFeedbackRequest(formFeedback);
-    if (addFeedbackResult.error) {
-      console.log("Произошла ошибка добавления, обработать!");
+    const { error, data } = await addFeedbackRequest(formFeedback);
+    if (error) {
+      console.log(`Произошла ошибка добавления, обработать: ${error}`);
     } else {
-      const newFeedback = addFeedbackResult.data;
-      console.log(`created with id ${newFeedback.id}`);
-      setFeedback([newFeedback, ...feedback]);
+      console.log(`created with id ${data.id}`);
+      setFeedback([data, ...feedback]);
     }
   };
 
-  const deleteFeedback = (id: number) => {
-    setFeedback(feedback.filter((item) => item.id !== id));
+  const deleteFeedback = async (id: string) => {
+    const { error } = await deleteFeedbackRequest(id);
+    if (error) {
+      console.log(`Произошла ошибка удаления: ${error}`);
+    } else {
+      setFeedback(feedback.filter((item) => item.id !== id));
+    }
   };
 
-  const editFeedback = (id: number) => {
+  const editFeedback = (id: string) => {
     const item: IFeedbackItem = feedback.find((item) => item.id == id);
     setCurrentItem(item);
   };

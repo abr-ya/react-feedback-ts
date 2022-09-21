@@ -30,3 +30,14 @@ export const addFeedbackRequest = async (item: INewFeedbackItem): Promise<INorma
 
   return { data: answer.data };
 };
+
+export const deleteFeedbackRequest = async (id: string): Promise<INormalizedResponse> => {
+  let answer: AxiosResponse;
+  try {
+    answer = await axios.delete(`${baseUrl}/${id}`);
+  } catch (err) {
+    return { error: err?.message, data: err?.response?.data };
+  }
+
+  return { data: answer.status };
+};

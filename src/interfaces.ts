@@ -14,7 +14,7 @@ export interface INewFeedbackItem {
 }
 
 export interface IFeedbackItem extends INewFeedbackItem {
-  id: number;
+  id: string;
 }
 
 // google answer
