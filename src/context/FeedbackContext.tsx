@@ -68,7 +68,7 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
   };
 
   const updateFeedback = async (fb: IFeedbackItem) => {
-    console.log('update', fb);
+    console.log("update", fb);
     const { error, data } = await updateFeedbackRequest(fb);
     if (error) {
       console.log(`Произошла ошибка обновления, обработать: ${error}`);
