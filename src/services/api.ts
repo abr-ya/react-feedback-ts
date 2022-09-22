@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { INewFeedbackItem } from "interfaces";
+import { IFeedbackItem, INewFeedbackItem } from "interfaces";
 
 const baseUrl = process.env.API_URL;
 
@@ -23,6 +23,18 @@ export const addFeedbackRequest = async (item: INewFeedbackItem): Promise<INorma
   let answer: AxiosResponse;
   try {
     answer = await axios.post(`${baseUrl}/`, item);
+  } catch (err) {
+    console.log(err);
+    return { error: err?.message };
+  }
+
+  return { data: answer.data };
+};
+
+export const updateFeedbackRequest = async (item: IFeedbackItem): Promise<INormalizedResponse> => {
+  let answer: AxiosResponse;
+  try {
+    answer = await axios.put(`${baseUrl}/${item.id}`, item);
   } catch (err) {
     console.log(err);
     return { error: err?.message };

@@ -1,6 +1,6 @@
 import { IFeedbackItem, INewFeedbackItem } from "interfaces";
 import { createContext, FC, ReactNode, useEffect, useState } from "react";
-import { addFeedbackRequest, deleteFeedbackRequest, getAllFeedbacks } from "services/api";
+import { addFeedbackRequest, deleteFeedbackRequest, getAllFeedbacks, updateFeedbackRequest } from "services/api";
 
 type FeedbackContextType = ReturnType<typeof FeedbackManager>;
 
@@ -67,9 +67,16 @@ const FeedbackManager = (initialFeedback: IFeedbackItem[]): IFeedbackManagerResu
     setCurrentItem(item);
   };
 
-  const updateFeedback = (fb: IFeedbackItem) => {
-    setFeedback(feedback.map((item) => (item.id !== fb.id ? item : fb)));
-    setCurrentItem(null);
+  const updateFeedback = async (fb: IFeedbackItem) => {
+    console.log('update', fb);
+    const { error, data } = await updateFeedbackRequest(fb);
+    if (error) {
+      console.log(`Произошла ошибка обновления, обработать: ${error}`);
+    } else {
+      console.log(`updated feedback with id ${data.id}`);
+      setFeedback(feedback.map((item) => (item.id !== fb.id ? item : fb)));
+      setCurrentItem(null);
+    }
   };
 
   return { feedback, addFeedback, deleteFeedback, editFeedback, currentItem, updateFeedback, isLoading };

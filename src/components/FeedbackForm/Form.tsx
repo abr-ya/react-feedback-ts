@@ -71,9 +71,7 @@ const Form = () => {
         addFeedback(newFeedback);
         toast("🦄 Отправляем отзыв...", topRight3sec);
       } else {
-        console.log("edit!");
-        const { id } = currentItem;
-        updateFeedback({ id, text, rating });
+        updateFeedback({ ...currentItem, text, rating });
       }
       resetForm();
     }
