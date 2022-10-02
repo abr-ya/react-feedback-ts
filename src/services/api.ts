@@ -16,7 +16,8 @@ export const getAllFeedbacks = async () => {
     console.log(err);
   }
 
-  return AllFeedbacks ? AllFeedbacks.data : false;
+  // перед возвратом сортируем по убыванию, чтобы последний отзыв был сверху
+  return AllFeedbacks ? AllFeedbacks.data.sort((a, b) => (a.id > b.id ? -1 : 1)) : false;
 };
 
 export const addFeedbackRequest = async (item: INewFeedbackItem): Promise<INormalizedResponse> => {

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components/macro";
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 
 export const StyledHeader = styled.header`
@@ -15,8 +15,10 @@ export const StyledHeader = styled.header`
 
 export const NavLinkBlock = styled.div`
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 20px;
 `;
 
 export const NavLink = styled(Link)`

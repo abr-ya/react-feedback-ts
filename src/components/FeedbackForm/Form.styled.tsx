@@ -35,6 +35,11 @@ export const StyledRatingSet = styled.ul`
   justify-content: space-around;
   margin: 30px 0 40px;
   list-style: none;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `;
 
 export const RatingLi = styled.li`
@@ -52,6 +57,10 @@ export const RatingLi = styled.li`
   &:hover {
     background: #ff6a95;
     color: #fff;
+  }
+
+  @media (max-width: 600px) {
+    margin: 10px 3px;
   }
 `;
 
